@@ -11,10 +11,10 @@ namespace StefaniniChallenge.Models
     {
         public EnumTypes _type { get; private set; }        
         int _saleId;
-        Product _product;
+        List<Product> _product = new List<Product>();
         string _salesmanName;
 
-        public Sale(int saleId, Product product, string salesmanName)
+        public Sale(int saleId, List<Product> product, string salesmanName)
         {
             _saleId = saleId;
             _product = product;

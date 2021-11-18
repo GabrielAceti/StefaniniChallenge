@@ -14,7 +14,7 @@ namespace StefaniniChallenge.Models
         string _name;
         int _totalPurchases;
 
-        public Customer(int type, string cpf, string name, int totalPurchases)
+        public Customer(string cpf, string name, int totalPurchases)
         {
             _cpf = cpf;
             _name = name;
