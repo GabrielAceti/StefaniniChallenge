@@ -4,7 +4,7 @@ namespace StefaniniChallenge.Services
 {
     public static class JSONServices
     {
-        public static string ToJSON(object obj)
+        public static string JSONParse(object obj)
         {
             return JsonSerializer.Serialize(obj);
         }

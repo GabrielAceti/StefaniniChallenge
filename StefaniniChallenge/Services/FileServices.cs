@@ -1,4 +1,5 @@
-﻿
+﻿using System.IO;
+
 namespace StefaniniChallenge.Services
 {
     public static class FileServices
@@ -8,9 +9,9 @@ namespace StefaniniChallenge.Services
             return System.IO.File.ReadAllLines(path);
         }
 
-        public static void CreateJSON(string json)
+        public static void CreateFile(string content, string path, string fileName)
         {
-
+            File.WriteAllText(path + @"\" + fileName, content);
         }
     }
 }
