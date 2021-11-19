@@ -5,9 +5,9 @@ namespace StefaniniChallenge.Models
     class Customer
     {
         public EnumTypes _type { get; private set; }
-        string _cpf;
-        string _name;
-        int _totalPurchases;
+        public string _cpf { get; private set; }
+        public string _name { get; private set; }
+        public int _totalPurchases { get; private set; }
 
         public Customer(string cpf, string name, int totalPurchases)
         {

@@ -86,7 +86,7 @@ namespace StefaniniChallenge
 
             string json = JSONServices.JSONParse(infData) + Environment.NewLine;
 
-            FileServices.CreateFile(json, pathOut, "teste.json");
+            FileServices.CreateFile(json, pathOut, Dir.GetFiles()[0].Name.Split('.')[0] + ".json");
             Console.WriteLine(json);
             Console.ReadLine();
         }
