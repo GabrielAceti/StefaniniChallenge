@@ -1,9 +1,5 @@
 ﻿using StefaniniChallenge.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StefaniniChallenge.Models
 {
@@ -20,6 +16,16 @@ namespace StefaniniChallenge.Models
             _itemList = itemList;
             _salesmanName = salesmanName;
             _type = EnumTypes.Sale;
+        }
+
+        public double TotalPrice()
+        {
+            double totalPrice = 0.0;
+            foreach (Item item in _itemList)
+            {
+                totalPrice += item.TotalPrice();
+            }
+            return totalPrice;
         }
     }
 }

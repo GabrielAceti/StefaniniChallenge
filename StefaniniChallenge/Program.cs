@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StefaniniChallenge
 {
@@ -60,59 +58,34 @@ namespace StefaniniChallenge
 
                     sales.Add(new Sale(saleId, itemList, salesmanName));
                 }
-            }
-
-            Console.WriteLine("Number of customers: " + customers.Count());
-            Console.WriteLine("Number of salesmen: " + salesmen.Count());
+            }            
 
             double mostExpensiveSale = 0.0;
             int? mostExpensiveSaleId = null;            
             foreach (Sale sale in sales)
             {
-                double totalPrice = 0.0;
-                foreach (Item item in sale._itemList)
-                {
-                    totalPrice += item.TotalPrice();                    
-                }
+                double totalPrice = sale.TotalPrice();                
 
                 if(totalPrice > mostExpensiveSale)
                 {
                     mostExpensiveSale = totalPrice;
                     mostExpensiveSaleId = sale._saleId;
                 }
-            }
-            Console.WriteLine("Most expensive sale id: " + mostExpensiveSaleId);
-
+            }            
 
             string worstSalesmanName = salesmen.First()._name;
             double worstSalesmanValue = 0.0;            
             IEnumerable<Sale> salesmanSales = sales.Where(x => x._salesmanName == worstSalesmanName);
 
             foreach (Sale sale in salesmanSales)
-            {
-                double saleTotalPrice = 0.0;
-                foreach (Item item in sale._itemList)
-                {
-                    saleTotalPrice += item.TotalPrice();
-                }
-                worstSalesmanValue += saleTotalPrice;
+            {                 
+                worstSalesmanValue += sale.TotalPrice();
             }
-
 
             foreach (Salesman salesman in salesmen)
             {
-                salesmanSales = sales.Where(x => x._salesmanName == salesman._name);       
-                
-                double totalPrice = 0.0;
-                foreach(Sale sale in salesmanSales)
-                {
-                    double saleTotalPrice = 0.0;
-                    foreach (Item item in sale._itemList)
-                    {
-                        saleTotalPrice += item.TotalPrice();
-                    }
-                    totalPrice += saleTotalPrice;
-                }
+                salesmanSales = sales.Where(x => x._salesmanName == salesman._name);                       
+                double totalPrice = salesman.TotalSales(salesmanSales.ToList());                
 
                 if(totalPrice < worstSalesmanValue)
                 {
@@ -120,7 +93,17 @@ namespace StefaniniChallenge
                     worstSalesmanName = salesman._name;
                 }
             }
-            Console.WriteLine("Worst salesman name: " + worstSalesmanName);
+
+            InformationData infData = new InformationData()
+            {
+                TotalCustomers = customers.Count(),
+                TotalSalesmen = salesmen.Count(),
+                MostExpensiveSaleId = (int)mostExpensiveSaleId,
+                WorstSalesman = worstSalesmanName
+            };
+
+            string teste = JSONServices.ToJSON(infData);
+            Console.WriteLine(teste);
             Console.ReadLine();
         }
     }
