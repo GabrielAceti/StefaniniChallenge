@@ -10,9 +10,9 @@ namespace StefaniniChallenge.Models
     class Salesman
     {
         public EnumTypes _type { get; private set; }
-        int _salesmanId;
-        string _name;
-        double _salary;
+        public int _salesmanId { get; private set; }
+        public string _name { get; private set; }
+        public double _salary { get; private set; }
 
         public Salesman(int salesmanId, string name, double salary)
         {
